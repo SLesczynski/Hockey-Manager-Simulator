@@ -49,7 +49,7 @@ public class MainMenuPanel extends JPanel implements ActionListener{
             System.out.println("Will be implemented later");
         }
         if (e.getSource() == startSingleGameButton) {
-            Controller.setTeamSelectPanel();
+            Controller.setSelectTwoTeams();
         }
     }
 }

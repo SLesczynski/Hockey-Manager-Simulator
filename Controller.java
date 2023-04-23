@@ -1,8 +1,4 @@
-import java.awt.Component;
-import java.awt.Panel;
-
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 /**
  * Controller
@@ -22,8 +18,8 @@ public class Controller extends JFrame{
         validate();
     }
 
-    public static void setTeamSelectPanel(){
-        thisJFrame.setContentPane(new SelectTeamPanel());
+    public static void setSelectTwoTeams(){
+        thisJFrame.setContentPane(new SelectTwoTeams());
         thisJFrame.invalidate();
         thisJFrame.validate();
     }
