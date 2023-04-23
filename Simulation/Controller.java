@@ -1,4 +1,11 @@
+package Simulation;
+import java.io.IOException;
+
 import javax.swing.JFrame;
+
+import LeagueInfo.Team;
+import Panels.*;
+import Panels.SelectTwoTeams;
 
 /**
  * Controller
@@ -20,6 +27,12 @@ public class Controller extends JFrame{
 
     public static void setSelectTwoTeams(){
         thisJFrame.setContentPane(new SelectTwoTeams());
+        thisJFrame.invalidate();
+        thisJFrame.validate();
+    }
+
+    public static void setOneVsOne(Team homeTeam, Team awayTeam) throws IOException{
+        thisJFrame.setContentPane(new OneVsOnePanel(homeTeam, awayTeam));
         thisJFrame.invalidate();
         thisJFrame.validate();
     }

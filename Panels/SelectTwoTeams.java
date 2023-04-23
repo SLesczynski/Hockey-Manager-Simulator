@@ -1,12 +1,17 @@
+package Panels;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import LeagueInfo.League;
+import Simulation.Controller;
 
 public class SelectTwoTeams extends JPanel implements ActionListener{
 
@@ -16,9 +21,9 @@ public class SelectTwoTeams extends JPanel implements ActionListener{
 
     JButton startGame;
 
-    SelectTwoTeams(){
+    public SelectTwoTeams(){
 
-        
+        //Setup Panel
         setBounds(0, 0, 1000, 1000);
         setLayout(null);
         setBackground(Color.darkGray);
@@ -62,6 +67,11 @@ public class SelectTwoTeams extends JPanel implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == startGame) {
+            try {
+                Controller.setOneVsOne(League.teamArray[homeTeamSelection.getSelectedIndex()], League.teamArray[awayTeamSelection.getSelectedIndex()]);
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
         }
     }
 }

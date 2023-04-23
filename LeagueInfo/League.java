@@ -1,13 +1,16 @@
+package LeagueInfo;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
 public class League {
-    Team[] teamArray = new Team[32];
-    static String[] teamNameArray = new String[32];
+    public static Team[] teamArray = new Team[32];
+    public static String[] teamNameArray = new String[32];
+    
     Player[] playerArray;
 
-    League(){
+    public League(){
         //Setup teams
         for(int i = 0; i != 32 ; i++){
             String tempName;

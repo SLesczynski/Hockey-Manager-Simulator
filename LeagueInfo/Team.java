@@ -1,13 +1,13 @@
-
+package LeagueInfo;
 
 public class Team {
-    String city;
-    String name;
-    Player[] roster;
-    int offense;
-    int defense;
-    int goalie;
-    int overall;
+    public String city;
+    public String name;
+    public Player[] roster;
+    public int offense;
+    public int defense;
+    public int goalie;
+    public int overall;
     public int wins = 0;
     public int loses = 0;  
 

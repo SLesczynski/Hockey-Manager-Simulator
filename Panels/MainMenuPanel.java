@@ -1,3 +1,6 @@
+package Panels;
+
+import Simulation.*;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -8,12 +11,13 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+
 public class MainMenuPanel extends JPanel implements ActionListener{
 
     JButton startSingleGameButton;
     JButton startCareerButton;
 
-    MainMenuPanel(){
+    public MainMenuPanel(){
 
         setBounds(0, 0, 1000, 1000);
         setLayout(null);
