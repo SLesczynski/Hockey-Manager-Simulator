@@ -59,6 +59,7 @@ public class ManagerViewPanel extends JPanel implements ActionListener{
             array[i][0] = League.teamArray[i].name;
             array[i][1] = Integer.toString(League.teamArray[i].wins);
             array[i][2] = Integer.toString(League.teamArray[i].loses);
+            System.out.println(League.teamArray[i].name + " " + Integer.toString(League.teamArray[i].wins) + "-" + Integer.toString(League.teamArray[i].loses));
         }
         teamInformationTable = new JTable(array, columnNames);
     }

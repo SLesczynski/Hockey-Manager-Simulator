@@ -57,7 +57,6 @@ public class SelectManagedTeam extends JPanel implements ActionListener{
         try {
             Controller.setManagerView();
         } catch (IOException e1) {
-            // TODO Auto-generated catch block
             e1.printStackTrace();
         }
     }

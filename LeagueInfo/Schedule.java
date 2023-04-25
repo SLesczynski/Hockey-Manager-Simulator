@@ -19,7 +19,9 @@ public class Schedule {
             Team currentAwayTeam = League.teamArray[i];
             if(currentAwayTeam != thisTeam){
                 int randomIndex = (int) (Math.random() * (250 - 59)) + 59;
-                while(teamSchedule[randomIndex] != null && League.teamArray[i].currentSchedule.teamSchedule[randomIndex] != null){
+                while(teamSchedule[randomIndex] != null
+                        || League.teamArray[i].currentSchedule.teamSchedule[randomIndex] != null)
+                {
                     randomIndex = (int) (Math.random() * (250 - 59)) + 59;
                 }
                 new ScheduledGame(randomIndex, thisTeam, currentAwayTeam);
