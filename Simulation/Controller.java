@@ -36,4 +36,10 @@ public class Controller extends JFrame{
         thisJFrame.invalidate();
         thisJFrame.validate();
     }
+
+    public static void setSelectManagedTeam() throws IOException{
+        thisJFrame.setContentPane(new SelectedManagedTeam());
+        thisJFrame.invalidate();
+        thisJFrame.validate();
+    }
 }

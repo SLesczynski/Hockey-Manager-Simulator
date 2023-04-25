@@ -10,7 +10,7 @@ public class League {
     
     Player[] playerArray;
 
-    public League(){
+    public League() throws IOException{
         //Setup teams
         for(int i = 0; i != 32 ; i++){
             String tempName;
@@ -21,6 +21,10 @@ public class League {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+
+        for(int i = 0; i != 32 ; i++){
+            teamArray[i].makeTeamSchedule();
         }
 
         for(int i = 0; i < teamArray.length; i++){

@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -50,7 +51,12 @@ public class MainMenuPanel extends JPanel implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == startCareerButton) {
-            System.out.println("Will be implemented later");
+                try {
+                    Controller.setSelectManagedTeam();
+                } catch (IOException e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                }
         }
         if (e.getSource() == startSingleGameButton) {
             Controller.setSelectTwoTeams();
