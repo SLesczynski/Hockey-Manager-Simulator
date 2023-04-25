@@ -4,21 +4,26 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTable;
 
 import LeagueInfo.League;
+import Simulation.Controller;
 
-public class SelectedManagedTeam extends JPanel implements ActionListener{
+public class SelectManagedTeam extends JPanel implements ActionListener{
     
     JComboBox<String> selectedManagedTeam;
 
+    JTable teamInformationTable;
+
     JButton startGame;
 
-    public SelectedManagedTeam(){
+    public SelectManagedTeam(){
         
         //Setup Panel
         setBounds(0, 0, 1000, 1000);
@@ -49,7 +54,11 @@ public class SelectedManagedTeam extends JPanel implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
+        try {
+            Controller.setManagerView();
+        } catch (IOException e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        }
     }
 }

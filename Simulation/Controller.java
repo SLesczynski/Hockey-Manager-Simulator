@@ -38,8 +38,18 @@ public class Controller extends JFrame{
     }
 
     public static void setSelectManagedTeam() throws IOException{
-        thisJFrame.setContentPane(new SelectedManagedTeam());
+        thisJFrame.setContentPane(new SelectManagedTeam());
         thisJFrame.invalidate();
         thisJFrame.validate();
+    }
+
+    public static void setManagerView() throws IOException{
+        thisJFrame.setContentPane(new ManagerViewPanel());
+        thisJFrame.invalidate();
+        thisJFrame.validate();
+    }
+
+    public static void simulateDay(){
+        SeasonSimulation.simulateDay();
     }
 }
