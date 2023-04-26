@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 import LeagueInfo.League;
 import Simulation.Controller;
@@ -56,12 +57,14 @@ public class ManagerViewPanel extends JPanel implements ActionListener{
         String[][] array = new String[32][3];
         String[] columnNames = { "Team", "Wins", "Loses" };
         for(int i = 0; i < 32; i++){
-            array[i][0] = League.teamArray[i].name;
+            array[i][0] = League.teamArray[i].getName();
             array[i][1] = Integer.toString(League.teamArray[i].wins);
             array[i][2] = Integer.toString(League.teamArray[i].loses);
-            System.out.println(League.teamArray[i].name + " " + Integer.toString(League.teamArray[i].wins) + "-" + Integer.toString(League.teamArray[i].loses));
         }
-        teamInformationTable = new JTable(array, columnNames);
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        model.setDataVector(array, columnNames);
+        table = new JTable(model);
+
     }
     
     @Override

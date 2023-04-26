@@ -26,8 +26,8 @@ public class OneVsOnePanel extends JPanel implements ActionListener{
     JLabel homeTeamInformation;
     JLabel awayTeamInformation;
     
-    public Team thisHomeTeam;
-    public Team thisAwayTeam;
+    Team thisHomeTeam;
+    Team thisAwayTeam;
 
     public OneVsOnePanel(Team homeTeam, Team awayTeam) throws IOException{
 
@@ -35,10 +35,10 @@ public class OneVsOnePanel extends JPanel implements ActionListener{
         thisAwayTeam = awayTeam;
         game = new Game(homeTeam, awayTeam);
         String favorite;
-        if (homeTeam.overall > awayTeam.overall) {
-            favorite = homeTeam.name;
-        } else if (homeTeam.overall < awayTeam.overall) {
-            favorite = awayTeam.name;
+        if (homeTeam.getOverall() > awayTeam.getOverall()) {
+            favorite = homeTeam.getName();
+        } else if (homeTeam.getOverall() < awayTeam.getOverall()) {
+            favorite = awayTeam.getName();
         } else {
             favorite = "Undecided";
         }
@@ -53,7 +53,7 @@ public class OneVsOnePanel extends JPanel implements ActionListener{
 
         // Top Text
         JLabel gameInfoText = new JLabel();
-        htmlText = new String("<html><center>" + homeTeam.name + " versus " + awayTeam.name + "<br>Favorite: "
+        htmlText = new String("<html><center>" + homeTeam.getName() + " versus " + awayTeam.getName() + "<br>Favorite: "
                 + favorite + "</html>");
         gameInfoText.setText(htmlText);
         gameInfoText.setHorizontalAlignment(JLabel.CENTER);
@@ -91,13 +91,13 @@ public class OneVsOnePanel extends JPanel implements ActionListener{
 
         // Show Win Chance Bar between the team information
         JLabel homeTeamWinChance = new JLabel();
-        homeTeamWinChance.setBounds(450, 50, 100, (int) (500 + game.favor));
+        homeTeamWinChance.setBounds(450, 50, 100, (int) (500 + game.getFavor()));
         homeTeamWinChance.setBackground(Color.blue);
         homeTeamWinChance.setOpaque(true);
         this.add(homeTeamWinChance);
 
         JLabel awayTeamWinChance = new JLabel();
-        awayTeamWinChance.setBounds(450, (int) (525 + game.favor), 100, (int) (500 - game.favor));
+        awayTeamWinChance.setBounds(450, (int) (525 + game.getFavor()), 100, (int) (500 - game.getFavor()));
         awayTeamWinChance.setBackground(Color.red);
         awayTeamWinChance.setOpaque(true);
         this.add(awayTeamWinChance);
@@ -135,10 +135,10 @@ public class OneVsOnePanel extends JPanel implements ActionListener{
     }
 
     void updateInformation(JLabel text, Team team, String alignment) {
-        htmlText = new String("<html><p style=\"text-align:" + alignment + ";\">" + team.name
-                + "<br>Offense: " + team.offense
-                + "<br>Defense:" + team.defense
-                + "<br>Goalie: " + team.goalie
+        htmlText = new String("<html><p style=\"text-align:" + alignment + ";\">" + team.getName()
+                + "<br>Offense: " + team.getOffence()
+                + "<br>Defense:" + team.getDefense()
+                + "<br>Goalie: " + team.getGoalie()
                 + "<br>Record: " + team.wins + " - " + team.loses + "</p></html>");
         text.setText(htmlText);
     }
