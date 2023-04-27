@@ -1,9 +1,21 @@
 package LeagueInfo;
 public abstract class Player {
 
+    int age;
     String name;
     int height = 100;
     int weight = 100;
+
+    public int[] seasonStats = {0,0,0};
+    int[][] careerStats = {};
+
+    public int getAge(){
+        return this.age;
+    }
+
+    public void ageUp(){
+        this.age++;
+    }
 
     public String getName(){
         return this.name;

@@ -21,10 +21,8 @@ public class ScheduledGame {
         gameSetup = new Game(homeTeam,awayTeam);
 
         homeTeam.currentSchedule.teamSchedule[index] = this;
-        homeTeam.currentSchedule.homeGames++;
     
         awayTeam.currentSchedule.teamSchedule[index] = this;
-        awayTeam.currentSchedule.awayGames++;
     }
 
     public int getGameDay(){

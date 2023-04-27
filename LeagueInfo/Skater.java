@@ -6,6 +6,7 @@ public class Skater extends Player{
     int skatingSkill;
     int shootingSkill;
     int defenseSkill;
+    int overall;
 
     Skater(String name, String position){
         setName(name);
@@ -13,6 +14,8 @@ public class Skater extends Player{
         skatingSkill = (int) (Math.random() * (99 - 40)) + 40;
         shootingSkill = (int) (Math.random() * (99 - 40)) + 40;
         defenseSkill = (int) (Math.random() * (99 - 40)) + 40;
+        overall = (skatingSkill + shootingSkill + defenseSkill)/3;
+        age = (int) (Math.random() * (40 - 18) + 18);
     }
 
     public String getName(){

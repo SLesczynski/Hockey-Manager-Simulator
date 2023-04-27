@@ -49,7 +49,7 @@ public class Controller extends JFrame{
         thisJFrame.validate();
     }
 
-    public static void simulateDay(){
+    public static void simulateDay() throws IOException{
         SeasonSimulation.simulateDay();
     }
 }

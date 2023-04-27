@@ -1,12 +1,15 @@
 package Simulation;
 
+import java.io.IOException;
+
 import LeagueInfo.League;
+import LeagueInfo.Schedule;
 
 public class SeasonSimulation {
     
     static int currentDayIndex;
 
-    public static void simulateDay() {
+    public static void simulateDay() throws IOException {
         System.out.println(currentDayIndex);
         for(int i = 0; i < 32; i++){
             if(League.teamArray[i].currentSchedule.teamSchedule[currentDayIndex] != null){
@@ -15,7 +18,12 @@ public class SeasonSimulation {
                 }
             }
         }
+        if(currentDayIndex == 364){
+        Schedule.nextSeasonSchedule();
+        currentDayIndex = 0;
+        } else {
         currentDayIndex++;
+        }
     }
     
 }

@@ -139,14 +139,16 @@ public class OneVsOnePanel extends JPanel implements ActionListener{
                 + "<br>Offense: " + team.getOffence()
                 + "<br>Defense:" + team.getDefense()
                 + "<br>Goalie: " + team.getGoalie()
-                + "<br>Record: " + team.wins + " - " + team.loses + "</p></html>");
+                + "<br>Record: " + team.currentSchedule.getWins() + " - " + team.currentSchedule.getLoses() + "</p></html>");
         text.setText(htmlText);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == simulateGame) {
-            game.playGame();
+            game.simulateGame();
+            System.out.println(game.homeTeamScore + " - " + game.awayTeamScore);
+            System.out.println("It took " + game.periodsPlayed + " periods to end the game.");
             updateInformation(homeTeamInformation, thisHomeTeam, "left");
             updateInformation(awayTeamInformation, thisAwayTeam, "right");
     }

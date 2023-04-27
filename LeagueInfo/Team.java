@@ -1,12 +1,15 @@
 package LeagueInfo;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Team {
     String city;
     String name;
 
     public Schedule currentSchedule;
+    List<Schedule> scheduleHistory = new ArrayList<Schedule>();
     
 
     public Player[] roster = new Player[50];
@@ -18,9 +21,6 @@ public class Team {
     int numGoalies = 0;
     int goalie = 0;
     int overall;
-
-    public int wins = 0;
-    public int loses = 0;  
 
     Team(String inputName) throws IOException{
     
@@ -82,5 +82,21 @@ public class Team {
 
     public int getOverall(){
         return this.overall;
+    }
+
+    public int totalWinsInGame(){
+        int returnInt = currentSchedule.wins;
+        for(int i = 0; i < scheduleHistory.size() - 1; i++){
+            returnInt+=scheduleHistory.get(i).wins;
+        }
+        return returnInt;
+    }
+
+    public int totalLosesInGame(){
+        int returnInt = currentSchedule.wins;
+        for(int i = 0; i < scheduleHistory.size() - 1; i++){
+            returnInt+=scheduleHistory.get(i).wins;
+        }
+        return returnInt;
     }
 }

@@ -7,6 +7,7 @@ public class Goalie extends Player{
     Goalie(String name){
         setName(name);
         goalieSkill = (int) (Math.random() * (99 - 40)) + 40;
+        age = (int) (Math.random() * (40 - 18) + 18);
     }
 
     public String getName(){
