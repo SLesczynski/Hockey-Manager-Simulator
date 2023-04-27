@@ -55,23 +55,27 @@ public class Game {
         }
     }
 
-    //Simulates a minute of gameplay
-    public void simulateMinute(){
-        int randomIndex = (int) (Math.random() * (1000 - 0)) + 0;
-            if(randomIndex < 50 + favor){
-                homeTeamScore++;
-                assignPoints(homeTeam);
-            } else if (randomIndex > 950 - favor){
-                awayTeamScore++;
-                assignPoints(awayTeam);
-            }
-    }
-
     //Simulates a period which is 20 minutes.
     public void simulatePeriod(){
         for(int i = 0; i < 20; i++){
             simulateMinute();
         }
+    }
+
+    //Simulates a minute of gameplay
+    public void simulateMinute(){
+        int randomIndex = (int) (Math.random() * (1000 - 0)) + 0;
+            if(randomIndex < 50 + favor){
+                homeTeamScore++;
+                homeTeam.currentSchedule.addGoalFor();
+                awayTeam.currentSchedule.addGoalAgainst();
+                assignPoints(homeTeam);
+            } else if (randomIndex > 950 - favor){
+                awayTeamScore++;
+                homeTeam.currentSchedule.addGoalAgainst();
+                awayTeam.currentSchedule.addGoalFor();
+                assignPoints(awayTeam);
+            }
     }
 
     //Simulates a period of overtime and stops if one of the teams scores.
@@ -108,8 +112,8 @@ public class Game {
     }
 
     public double getExpectedShots(Team attackTeam, Team defenseTeam){
-        int totalShootingSkill = 0;
-        int opposingTeamDefense = 0;
+        double totalShootingSkill = 0;
+        double opposingTeamDefense = 0;
         for(int i = 0; i < 47; i++){
             totalShootingSkill+= (((Skater) attackTeam.roster[i]).getSkatingSkill());
         }
@@ -117,9 +121,8 @@ public class Game {
         for(int i = 0; i < 47; i++){
             opposingTeamDefense+= (((Skater) defenseTeam.roster[i]).getDefensiveSkill());
         }
-        System.out.println(totalShootingSkill);
-        System.out.println(opposingTeamDefense);
-        return ((totalShootingSkill/opposingTeamDefense) * 100);
+
+        return ((totalShootingSkill/opposingTeamDefense) * 30);
     }
 
     public Team getHomeTeam(){

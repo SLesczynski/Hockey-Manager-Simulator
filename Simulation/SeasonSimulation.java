@@ -18,11 +18,15 @@ public class SeasonSimulation {
                 }
             }
         }
+        if(League.teamArray[0].currentSchedule.getWins() > 0 || League.teamArray[0].currentSchedule.getLoses() > 0){
+            System.out.println((double) League.teamArray[0].currentSchedule.getGoalsFor()/(League.teamArray[0].currentSchedule.getWins() + League.teamArray[0].currentSchedule.getLoses()));
+        }
+        System.out.println(League.teamArray[0].roster[0].seasonStats[0]);
         if(currentDayIndex == 364){
-        Schedule.nextSeasonSchedule();
-        currentDayIndex = 0;
+            Schedule.nextSeasonSchedule();
+            currentDayIndex = 0;
         } else {
-        currentDayIndex++;
+            currentDayIndex++;
         }
     }
     

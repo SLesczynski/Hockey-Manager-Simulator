@@ -104,7 +104,7 @@ public class OneVsOnePanel extends JPanel implements ActionListener{
 
         // Simulate game button
         simulateGame = new JButton();
-        simulateGame.setBounds(50, 890, 250, 50);
+        simulateGame.setBounds(50, 500, 250, 50);
         simulateGame.addActionListener((ActionListener) this);
         simulateGame.setText("Simulate Game");
         simulateGame.setFont(new Font("Verdana", Font.PLAIN, 20));

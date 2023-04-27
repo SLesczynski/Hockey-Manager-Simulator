@@ -11,6 +11,9 @@ public class Schedule {
 
     int points = 0;
 
+    int goalsFor = 0;
+    int goalsAgainst = 0;
+
     public Schedule(){
 
     }
@@ -30,6 +33,22 @@ public class Schedule {
 
     public void lostGame(){
         this.loses++;
+    }
+
+    public int getGoalsFor(){
+        return goalsFor;
+    }
+
+    public void addGoalFor(){
+        goalsFor++;
+    }
+
+    public int getGoalsAgainst(){
+        return goalsAgainst;
+    }
+
+    public void addGoalAgainst(){
+        goalsAgainst++;
     }
 
     public void makeSchedule(Team thisTeam) throws IOException{
