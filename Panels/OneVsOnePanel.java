@@ -91,20 +91,20 @@ public class OneVsOnePanel extends JPanel implements ActionListener{
 
         // Show Win Chance Bar between the team information
         JLabel homeTeamWinChance = new JLabel();
-        homeTeamWinChance.setBounds(450, 50, 100, (int) (500 + game.getFavor()));
+        homeTeamWinChance.setBounds(450, 100, 100, (int) (400 + game.getFavor()));
         homeTeamWinChance.setBackground(Color.blue);
         homeTeamWinChance.setOpaque(true);
         this.add(homeTeamWinChance);
 
         JLabel awayTeamWinChance = new JLabel();
-        awayTeamWinChance.setBounds(450, (int) (525 + game.getFavor()), 100, (int) (500 - game.getFavor()));
+        awayTeamWinChance.setBounds(450, (int) (450 + game.getFavor()), 100, (int) (400 - game.getFavor()));
         awayTeamWinChance.setBackground(Color.red);
         awayTeamWinChance.setOpaque(true);
         this.add(awayTeamWinChance);
 
         // Simulate game button
         simulateGame = new JButton();
-        simulateGame.setBounds(50, 900, 250, 50);
+        simulateGame.setBounds(50, 890, 250, 50);
         simulateGame.addActionListener((ActionListener) this);
         simulateGame.setText("Simulate Game");
         simulateGame.setFont(new Font("Verdana", Font.PLAIN, 20));
@@ -112,7 +112,7 @@ public class OneVsOnePanel extends JPanel implements ActionListener{
 
         // Back to GameCreationButon
         backButton = new JButton();
-        backButton.setBounds(700, 900, 250, 50);
+        backButton.setBounds(700, 890, 250, 50);
         backButton.addActionListener((ActionListener) this);
         backButton.setText("Back");
         backButton.setFont(new Font("Verdana", Font.PLAIN, 20));
@@ -120,7 +120,7 @@ public class OneVsOnePanel extends JPanel implements ActionListener{
 
         // Boarder Gray
         JLabel boarderGray = new JLabel();
-        boarderGray.setBounds(10, 10, 980, 980);
+        boarderGray.setBounds(10, 10, 965, 940);
         boarderGray.setBackground(myGray);
         boarderGray.setOpaque(true);
         this.add(boarderGray);
@@ -146,9 +146,13 @@ public class OneVsOnePanel extends JPanel implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == simulateGame) {
-            game.simulateGame();
+            game.playGame();
             System.out.println(game.homeTeamScore + " - " + game.awayTeamScore);
             System.out.println("It took " + game.periodsPlayed + " periods to end the game.");
+            if(game.extraMinutesPlayed > 0){
+                System.out.println("and also took " + game.extraMinutesPlayed + " of extra minutes to win.");
+            }
+
             updateInformation(homeTeamInformation, thisHomeTeam, "left");
             updateInformation(awayTeamInformation, thisAwayTeam, "right");
     }
