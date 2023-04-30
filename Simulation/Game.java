@@ -183,8 +183,8 @@ public class Game {
     }
 
     public double getExpectedShots(Team attackTeam, Team defenseTeam){
-        int totalShootingSkill = 0;
-        int opposingTeamDefense = 0;
+        double totalShootingSkill = 0;
+        double opposingTeamDefense = 0;
         for(int i = 0; i < 47; i++){
             totalShootingSkill+= (((Skater) attackTeam.roster[i]).getSkatingSkill());
         }
@@ -192,9 +192,8 @@ public class Game {
         for(int i = 0; i < 47; i++){
             opposingTeamDefense+= (((Skater) defenseTeam.roster[i]).getDefensiveSkill());
         }
-        System.out.println(totalShootingSkill);
-        System.out.println(opposingTeamDefense);
-        return ((totalShootingSkill/opposingTeamDefense) * 100);
+
+        return ((totalShootingSkill/opposingTeamDefense) * 30);
     }
 
     public Team getHomeTeam(){
