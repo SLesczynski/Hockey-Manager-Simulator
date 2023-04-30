@@ -1,7 +1,10 @@
 package LeagueInfo;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Team {
@@ -11,6 +14,9 @@ public class Team {
     public Schedule currentSchedule;
     List<Schedule> scheduleHistory = new ArrayList<Schedule>();
     
+    OffensiveLine[] currentOffensiveLines = new OffensiveLine[4];
+    DefensiveLine[] currentDefensiveLines = new DefensiveLine[3];
+    Goalie currentGoalie;
 
     public Player[] roster = new Player[50];
 
@@ -30,13 +36,15 @@ public class Team {
             currentSchedule = new Schedule();
 
             for(int i = 0; i < 47; i++){
-                String tempName = name + i;
-                roster[i] = new Skater(tempName, "Skater");
+                String tempFirstName = Files.readAllLines(Paths.get("FirstNames.txt")).get((int) (Math.random() * (2900 - 0) + 0));
+                String tempLastName = Files.readAllLines(Paths.get("LastNames.txt")).get((int) (Math.random() * (88000 - 0) + 0));
+                roster[i] = new Skater(tempFirstName, tempLastName, "Skater");
             }
 
             for(int i = 47; i < 50; i++){
-                String tempName = name + i;
-                roster[i] = new Goalie(tempName);
+                String tempFirstName = Files.readAllLines(Paths.get("FirstNames.txt")).get((int) (Math.random() * (2900 - 0) + 0));
+                String tempLastName = Files.readAllLines(Paths.get("LastNames.txt")).get((int) (Math.random() * (88000 - 0) + 0));
+                roster[i] = new Goalie(tempFirstName, tempLastName);
             }
 
             for(int i = 0; i < 50; i++){
@@ -58,6 +66,10 @@ public class Team {
 
     public void makeTeamSchedule() throws IOException{
         this.currentSchedule.makeSchedule(this);
+    }
+
+    public void makeLines(){
+
     }
 
     public String getCity(){

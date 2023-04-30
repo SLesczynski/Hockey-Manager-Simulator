@@ -9,14 +9,21 @@ public class Game {
 
     double favor = 10;
 
+    public int faceOffs = 0;
+
     Team homeTeam;
     public int homeTeamScore;
+    public int homeTeamShots;
+    public int homeTeamHits;
 
     Team awayTeam;
     public int awayTeamScore;
+    public int awayTeamShots;
+    public int awayTeamHits;
 
     public int periodsPlayed = 3;
     public int extraMinutesPlayed = 0;
+    public int extraSecondsPlayed = 0;
 
 
     public Game( Team homeTeam, Team awayTeam) throws IOException {
@@ -38,14 +45,26 @@ public class Game {
            homeTeam.currentSchedule.lostGame();
            awayTeam.currentSchedule.wonGame();
         }
+        System.out.println("Home Team Goalie Save Percentage: " + (1 - ((awayTeamScore*1.000))/awayTeamShots));
+        System.out.println("Away Team Goalie Save Percentage: " + (1 - ((homeTeamScore*1.000))/homeTeamShots));
     }
 
     //Simulates each period and necessary overtime periods.
     public void simulateGame(){
         homeTeamScore = 0;
         awayTeamScore = 0;
+
+        homeTeamShots = 0;
+        awayTeamShots = 0;
+
         periodsPlayed = 3;
         extraMinutesPlayed = 0;
+        extraSecondsPlayed = 0;
+
+        homeTeamHits = 0;
+        awayTeamHits = 0;
+        faceOffs = 0;
+
         simulatePeriod();
         simulatePeriod();
         simulatePeriod();
@@ -53,25 +72,9 @@ public class Game {
             simulateOvertime();
             periodsPlayed++;
         }
-    }
-
-    //Simulates a minute of gameplay
-    public void simulateMinute(){
-        int randomIndex = (int) (Math.random() * (1000 - 0)) + 0;
-            if(randomIndex < 50 + favor){
-                homeTeamScore++;
-                assignPoints(homeTeam);
-            } else if (randomIndex > 950 - favor){
-                awayTeamScore++;
-                assignPoints(awayTeam);
-            }
-    }
-
-    //Simulates a period which is 20 minutes.
-    public void simulatePeriod(){
-        for(int i = 0; i < 20; i++){
-            simulateMinute();
-        }
+        System.out.println(faceOffs);
+        System.out.println("Home Team Hits: " + homeTeamHits);
+        System.out.println("Away Team Hits: " + awayTeamHits);
     }
 
     //Simulates a period of overtime and stops if one of the teams scores.
@@ -87,24 +90,96 @@ public class Game {
         }
     }
 
+    //Simulates a period which is 20 minutes.
+    public void simulatePeriod(){
+        for(int i = 0; i < 20; i++){
+            simulateMinute();
+        }
+    }
+
+    //Simulates a minute of gameplay
+    public void simulateMinute(){
+        for(int i = 0; i < 60; i++)
+            simulateSecond();
+    }
+
+    public void simulateSecond(){
+        int randomEvent = (int) (Math.random() * (1000 - 0)) + 0;
+        if(randomEvent > 0 && randomEvent < 200){
+            simulateShot();
+        } else if(randomEvent > 962 && randomEvent <= 970) {
+            homeTeamHits++;
+        } else if(randomEvent > 972 && randomEvent <= 980){
+            awayTeamHits++;
+        } else if(randomEvent > 983 && randomEvent < 999) {
+            simulateFaceoff();
+        } else {
+            return;
+        }
+    }
+
+    public void simulateShot(){
+        int randomIndex = (int) (Math.random() * (1000 - 0)) + 0;
+        if(randomIndex < 40 + favor){
+            homeTeamShots++;
+            shoot(homeTeam, awayTeam);
+        } else if (randomIndex > 960 - favor){
+            awayTeamShots++;
+            shoot(awayTeam, homeTeam);
+        }
+    }
+
+
+    public void shoot(Team offense, Team defense){
+        double randomShotSelection = Math.random();
+        System.out.println("Shot:" + randomShotSelection);
+        
+        int randomScorer = (int) (Math.random() * (21 - 0)) + 0;
+        Skater shootingPlayer = ((Skater) offense.roster[randomScorer]);
+
+        Goalie goalieInNet = ((Goalie) defense.roster[48]);
+
+        double goalieSaveChance = 0.9000 - (((shootingPlayer.getShootingSkill()/1000.0000)*1.1) - (goalieInNet.getGoalieSkill()/1000.0000));
+
+        System.out.println("Shooter skill : " + shootingPlayer.getShootingSkill());
+        System.out.println("Goalie skill: " + goalieInNet.getGoalieSkill());
+        System.out.println("Goalie Expected Save percent: " + goalieSaveChance);
+
+        if(randomShotSelection > goalieSaveChance ) {
+            scoreGoal(offense);
+            assignPoints(offense, shootingPlayer);
+        }
+    }
+
+    public void scoreGoal(Team scoringTeam){
+        if(scoringTeam == homeTeam){
+            homeTeamScore++;
+        } else {
+            awayTeamScore++;
+        }
+    }
+
+    public void simulateFaceoff(){
+        faceOffs++;
+    }
+
     //When a team scores this sets the scorer and assists.
-    public void assignPoints(Team scoringTeam){
-        int randomScorer = (int) (Math.random() * (47 - 0)) + 0;
-        int randomAssistOne = (int) (Math.random() * (47 - 0)) + 0;
-        int randomAssistTwo = (int) (Math.random() * (47 - 0)) + 0;
-        while(randomScorer == randomAssistOne){
-            randomAssistOne = (int) (Math.random() * (47 - 0)) + 0;
-            while(randomScorer == randomAssistTwo){
-                randomAssistTwo = (int) (Math.random() * (47 - 0)) + 0;
+    public void assignPoints(Team scoringTeam, Skater scorer){
+        int randomAssistOne = (int) (Math.random() * (21 - 0)) + 0;
+        int randomAssistTwo = (int) (Math.random() * (21 - 0)) + 0;
+        while(scorer == scoringTeam.roster[randomAssistOne]){
+            randomAssistOne = (int) (Math.random() * (21 - 0)) + 0;
+            while(scorer == scoringTeam.roster[randomAssistTwo]){
+                randomAssistTwo = (int) (Math.random() * (21 - 0)) + 0;
                 while(randomAssistOne == randomAssistTwo){
-                    randomAssistTwo = (int) (Math.random() * (47 - 0)) + 0;
+                    randomAssistTwo = (int) (Math.random() * (21 - 0)) + 0;
                 }
             }
         }
-        scoringTeam.roster[randomScorer].seasonStats[0]+=1;
+        scorer.seasonStats[0]+=1;
         scoringTeam.roster[randomAssistOne].seasonStats[1]+=1;
         scoringTeam.roster[randomAssistTwo].seasonStats[1]+=1;
-        System.out.println("Goal Scored by " + scoringTeam.roster[randomScorer].getName() + " with an assist from " + scoringTeam.roster[randomAssistOne].getName() + " and " + scoringTeam.roster[randomAssistTwo].getName());
+        System.out.println("Goal Scored by " + scorer.getName() + " with an assist from " + scoringTeam.roster[randomAssistOne].getName() + " and " + scoringTeam.roster[randomAssistTwo].getName());
     }
 
     public double getExpectedShots(Team attackTeam, Team defenseTeam){

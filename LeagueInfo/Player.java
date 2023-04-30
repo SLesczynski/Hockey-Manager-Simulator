@@ -2,7 +2,8 @@ package LeagueInfo;
 public abstract class Player {
 
     int age;
-    String name;
+    String firstName;
+    String lastName;
     int height = 100;
     int weight = 100;
 
@@ -18,11 +19,15 @@ public abstract class Player {
     }
 
     public String getName(){
-        return this.name;
+        return this.firstName + " " + this.lastName;
     }
 
-    public void setName(String newName){
-        this.name = newName;
+    public void setFirstName(String newFirstName){
+        this.firstName = newFirstName;
+    }
+
+    public void setLastName(String newLastName){
+        this.lastName = newLastName;
     }
 
     public int getHeight(){

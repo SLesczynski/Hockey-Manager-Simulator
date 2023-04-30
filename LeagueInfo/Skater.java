@@ -8,22 +8,18 @@ public class Skater extends Player{
     int defenseSkill;
     int overall;
 
-    Skater(String name, String position){
-        setName(name);
+    Skater(String name, String lastName, String position){
+        setFirstName(name);
+
+        String newLastName = lastName.toLowerCase();
+        newLastName = newLastName.substring(0, 1).toUpperCase() + newLastName.substring(1);
+        setLastName(newLastName);
         setPosition(position);
         skatingSkill = (int) (Math.random() * (99 - 40)) + 40;
         shootingSkill = (int) (Math.random() * (99 - 40)) + 40;
         defenseSkill = (int) (Math.random() * (99 - 40)) + 40;
         overall = (skatingSkill + shootingSkill + defenseSkill)/3;
         age = (int) (Math.random() * (40 - 18) + 18);
-    }
-
-    public String getName(){
-        return this.name;
-    }
-
-    public void setName(String name){
-        this.name = name;
     }
 
     public String getPosition(){
