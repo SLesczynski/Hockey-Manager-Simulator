@@ -7,10 +7,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.border.Border;
 
 
 public class MainMenuPanel extends JPanel implements ActionListener{
@@ -20,7 +22,7 @@ public class MainMenuPanel extends JPanel implements ActionListener{
 
     public MainMenuPanel(){
 
-        setBounds(0, 0, 1000, 1000);
+        setBounds(0, 0, Controller.width, Controller.height);
         setLayout(null);
         setBackground(Color.darkGray);
 
@@ -28,7 +30,9 @@ public class MainMenuPanel extends JPanel implements ActionListener{
         JLabel gameName = new JLabel();
         gameName.setText("Hockey Game Simulator");
         gameName.setHorizontalAlignment(JTextField.CENTER);
-        gameName.setBounds(0, 10, 1000, 75);
+        gameName.setBounds(0, 10, this.getWidth(), 75);
+        System.out.println(Controller.width);
+        System.out.println(Controller.height);
         gameName.setForeground(Color.white);
         gameName.setFont(new Font("Verdana", Font.PLAIN, 75));
         add(gameName);
@@ -46,6 +50,10 @@ public class MainMenuPanel extends JPanel implements ActionListener{
         startSingleGameButton.addActionListener((ActionListener) this);
         startSingleGameButton.setText("Single Game");
         add(startSingleGameButton);
+
+        //Border
+        Border border = BorderFactory.createLineBorder(Color.RED, Controller.width/675);
+        setBorder(border);
     }
 
     @Override
