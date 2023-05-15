@@ -11,16 +11,22 @@ import Panels.SelectTwoTeams;
  * Controller
  */
 public class Controller extends JFrame{
+
+    public static int width;
+    public static int height;
     static JFrame thisJFrame;
     public Controller(){
         thisJFrame = this;
-        setSize(1000, 1000);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         setVisible(true);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setResizable(false);
+        setResizable(true);
         setLayout(null);
         
+        width = this.getWidth();
+        height = this.getHeight();
+
         setContentPane(new MainMenuPanel());
         validate();
     }
