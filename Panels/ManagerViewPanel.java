@@ -6,24 +6,35 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
 
 import LeagueInfo.League;
+import LeagueInfo.ScheduledGame;
+import LeagueInfo.Team;
 import Simulation.Controller;
+import Simulation.Game;
+import Simulation.SeasonSimulation;
 
 public class ManagerViewPanel extends JPanel implements ActionListener{
 
+    Team managerTeam;
     JButton nextDay;
 
     JTable teamInformationTable;
 
-    public ManagerViewPanel(){
-        
+    JLabel lastGameInformation;
+
+    public ManagerViewPanel(Team managedTeam){
+
+        managerTeam = managedTeam;
 
         //Setup Panel
         setBounds(0, 0, 1000, 1000);
@@ -46,12 +57,26 @@ public class ManagerViewPanel extends JPanel implements ActionListener{
         nextDay.setText("Single Game");
         add(nextDay);
 
+        //Setup team and record view.
         teamInformationTable = new JTable();
         teamInformationTable.setFont(new Font("Verdana", Font.PLAIN, 17));
         updateTable(teamInformationTable);
         teamInformationTable.setBounds(100, 300, 400, 511);
         this.add(teamInformationTable);
 
+
+        //Boarder
+        Border border = BorderFactory.createLineBorder(Color.RED);
+
+        //Show last game score.
+        lastGameInformation = new JLabel();
+        lastGameInformation.setText("");
+        gameName.setVerticalAlignment(JLabel.TOP);
+        lastGameInformation.setBounds(525, 300, 400, 600);
+        lastGameInformation.setForeground(Color.white);
+        lastGameInformation.setFont(new Font("Verdana", Font.PLAIN, 15));
+        lastGameInformation.setBorder(border);
+        add(lastGameInformation);
 
     }
 
@@ -73,11 +98,26 @@ public class ManagerViewPanel extends JPanel implements ActionListener{
         teamInformationTable.getColumnModel().getColumn(2).setPreferredWidth(10);
         teamInformationTable.getColumnModel().getColumn(3).setPreferredWidth(10);
     }
+
+    public void updateLastGameInformation(JLabel label){
+        if(managerTeam.currentSchedule.teamSchedule[SeasonSimulation.getDay() - 1] != null){
+            label.setText("<html>");
+            Game thisGame = managerTeam.currentSchedule.teamSchedule[SeasonSimulation.getDay() - 1].getGame();
+            for(int i = 0; i < thisGame.events.size(); i++){
+                System.out.println(thisGame.events);
+                label.setText(label.getText() + "<br><br>" + thisGame.events.get(i));
+            }
+            label.setText(label.getText() + "</html>");
+        } else {
+            label.setText("No game on the " + SeasonSimulation.getDay() + " day of the season.");
+        }
+    }
     
     @Override
     public void actionPerformed(ActionEvent e) {
         try {
             Controller.simulateDay();
+            updateLastGameInformation(lastGameInformation);
         } catch (IOException e1) {
             e1.printStackTrace();
         }

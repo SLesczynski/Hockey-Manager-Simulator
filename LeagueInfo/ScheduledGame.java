@@ -6,7 +6,7 @@ import Simulation.Game;
 
 public class ScheduledGame {
 
-    int dayInSeason;
+    static int dayInSeason;
 
     Team homeTeam;
     Team awayTeam;
@@ -25,7 +25,7 @@ public class ScheduledGame {
         awayTeam.currentSchedule.teamSchedule[index] = this;
     }
 
-    public int getGameDay(){
+    public static int getGameDay(){
         return dayInSeason;
     }
 

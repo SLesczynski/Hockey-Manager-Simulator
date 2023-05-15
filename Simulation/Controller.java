@@ -43,8 +43,8 @@ public class Controller extends JFrame{
         thisJFrame.validate();
     }
 
-    public static void setManagerView() throws IOException{
-        thisJFrame.setContentPane(new ManagerViewPanel());
+    public static void setManagerView(Team managedTeam) throws IOException{
+        thisJFrame.setContentPane(new ManagerViewPanel(managedTeam));
         thisJFrame.invalidate();
         thisJFrame.validate();
     }

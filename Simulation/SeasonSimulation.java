@@ -30,4 +30,7 @@ public class SeasonSimulation {
         }
     }
     
+    public static int getDay(){
+        return currentDayIndex;
+    }
 }

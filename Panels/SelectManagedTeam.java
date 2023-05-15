@@ -55,7 +55,7 @@ public class SelectManagedTeam extends JPanel implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         try {
-            Controller.setManagerView();
+            Controller.setManagerView(League.teamArray[selectedManagedTeam.getSelectedIndex()]);
         } catch (IOException e1) {
             e1.printStackTrace();
         }

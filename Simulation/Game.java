@@ -1,5 +1,6 @@
 package Simulation;
 import java.io.IOException;
+import java.util.LinkedList;
 
 import LeagueInfo.*;
 
@@ -25,6 +26,7 @@ public class Game {
     public int extraMinutesPlayed = 0;
     public int extraSecondsPlayed = 0;
 
+    public LinkedList<String> events = new LinkedList<String>();
 
     public Game( Team homeTeam, Team awayTeam) throws IOException {
 
@@ -36,8 +38,9 @@ public class Game {
 
     //Simulates game and then assigns win and loss.
     public void playGame() {
+        events.add(homeTeam.getName() + " vs " + awayTeam.getName());
         simulateGame();
-        System.out.println("Expected Shots " + getExpectedShots(homeTeam, awayTeam));
+        // System.out.println("Expected Shots " + getExpectedShots(homeTeam, awayTeam));
         if(homeTeamScore > awayTeamScore){
             homeTeam.currentSchedule.wonGame();
             awayTeam.currentSchedule.lostGame();
@@ -45,8 +48,9 @@ public class Game {
            homeTeam.currentSchedule.lostGame();
            awayTeam.currentSchedule.wonGame();
         }
-        System.out.println("Home Team Goalie Save Percentage: " + (1 - ((awayTeamScore*1.000))/awayTeamShots));
-        System.out.println("Away Team Goalie Save Percentage: " + (1 - ((homeTeamScore*1.000))/homeTeamShots));
+        events.add("Final score: " + homeTeamScore + "-" + awayTeamScore);
+        // System.out.println("Home Team Goalie Save Percentage: " + (1 - ((awayTeamScore*1.000))/awayTeamShots));
+        // System.out.println("Away Team Goalie Save Percentage: " + (1 - ((homeTeamScore*1.000))/homeTeamShots));
     }
 
     //Simulates each period and necessary overtime periods.
@@ -72,9 +76,9 @@ public class Game {
             simulateOvertime();
             periodsPlayed++;
         }
-        System.out.println(faceOffs);
-        System.out.println("Home Team Hits: " + homeTeamHits);
-        System.out.println("Away Team Hits: " + awayTeamHits);
+        // System.out.println(faceOffs);
+        // System.out.println("Home Team Hits: " + homeTeamHits);
+        // System.out.println("Away Team Hits: " + awayTeamHits);
     }
 
     //Simulates a period of overtime and stops if one of the teams scores.
@@ -132,7 +136,7 @@ public class Game {
 
     public void shoot(Team offense, Team defense){
         double randomShotSelection = Math.random();
-        System.out.println("Shot:" + randomShotSelection);
+        // System.out.println("Shot:" + randomShotSelection);
         
         int randomScorer = (int) (Math.random() * (21 - 0)) + 0;
         Skater shootingPlayer = ((Skater) offense.roster[randomScorer]);
@@ -141,9 +145,9 @@ public class Game {
 
         double goalieSaveChance = 0.9000 - (((shootingPlayer.getShootingSkill()/1000.0000)*1.1) - (goalieInNet.getGoalieSkill()/1000.0000));
 
-        System.out.println("Shooter skill : " + shootingPlayer.getShootingSkill());
-        System.out.println("Goalie skill: " + goalieInNet.getGoalieSkill());
-        System.out.println("Goalie Expected Save percent: " + goalieSaveChance);
+        // System.out.println("Shooter skill : " + shootingPlayer.getShootingSkill());
+        // System.out.println("Goalie skill: " + goalieInNet.getGoalieSkill());
+        // System.out.println("Goalie Expected Save percent: " + goalieSaveChance);
 
         if(randomShotSelection > goalieSaveChance ) {
             scoreGoal(offense);
@@ -179,7 +183,7 @@ public class Game {
         scorer.seasonStats[0]+=1;
         scoringTeam.roster[randomAssistOne].seasonStats[1]+=1;
         scoringTeam.roster[randomAssistTwo].seasonStats[1]+=1;
-        System.out.println("Goal Scored by " + scorer.getName() + " with an assist from " + scoringTeam.roster[randomAssistOne].getName() + " and " + scoringTeam.roster[randomAssistTwo].getName());
+        events.add("(" + scoringTeam.getName() + ") Goal Scored by " + scorer.getName() + " with an assist from " + scoringTeam.roster[randomAssistOne].getName() + " and " + scoringTeam.roster[randomAssistTwo].getName());
     }
 
     public double getExpectedShots(Team attackTeam, Team defenseTeam){
