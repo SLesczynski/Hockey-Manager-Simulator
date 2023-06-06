@@ -12,12 +12,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
 
 import LeagueInfo.League;
-import LeagueInfo.ScheduledGame;
 import LeagueInfo.Team;
 import Simulation.Controller;
 import Simulation.Game;
