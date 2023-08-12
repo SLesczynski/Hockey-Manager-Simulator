@@ -1,10 +1,16 @@
 package LeagueInfo;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.imageio.ImageIO;
+
+import Simulation.Controller;
 
 public class Team {
     String city;
@@ -13,8 +19,6 @@ public class Team {
     public Schedule currentSchedule;
     List<Schedule> scheduleHistory = new ArrayList<Schedule>();
     
-    OffensiveLine[] currentOffensiveLines = new OffensiveLine[4];
-    DefensiveLine[] currentDefensiveLines = new DefensiveLine[3];
     Goalie currentGoalie;
 
     public Player[] roster = new Player[50];
@@ -27,22 +31,26 @@ public class Team {
     int goalie = 0;
     int overall;
 
-    Team(String inputName) throws IOException{
+    BufferedImage logo = null;
+    File logoFile = null;
+
+    Team(String inputCity, String inputName) throws IOException{
     
             //Random Number with bounds: int randomNumber = (int) (Math.random() * (upper - lower)) + lower;
+            city = inputCity;
             name = inputName;
 
             currentSchedule = new Schedule();
 
             for(int i = 0; i < 47; i++){
-                String tempFirstName = Files.readAllLines(Paths.get("FirstNames.txt")).get((int) (Math.random() * (2900 - 0) + 0));
-                String tempLastName = Files.readAllLines(Paths.get("LastNames.txt")).get((int) (Math.random() * (88000 - 0) + 0));
+                String tempFirstName = League.firstNames.get((int) (Math.random() * (2900 - 0) + 0));
+                String tempLastName = League.lastNames.get((int) (Math.random() * (88000 - 0) + 0));
                 roster[i] = new Skater(tempFirstName, tempLastName, "Skater");
             }
 
             for(int i = 47; i < 50; i++){
-                String tempFirstName = Files.readAllLines(Paths.get("FirstNames.txt")).get((int) (Math.random() * (2900 - 0) + 0));
-                String tempLastName = Files.readAllLines(Paths.get("LastNames.txt")).get((int) (Math.random() * (88000 - 0) + 0));
+                String tempFirstName = League.firstNames.get((int) (Math.random() * (2900 - 0) + 0));
+                String tempLastName = League.lastNames.get((int) (Math.random() * (88000 - 0) + 0));
                 roster[i] = new Goalie(tempFirstName, tempLastName);
             }
 
@@ -61,6 +69,17 @@ public class Team {
             defense = defense/numSkaters;
             goalie = goalie/numGoalies;
             overall = offense + defense + goalie;
+
+            try{
+                System.out.println(this.city + ".png");
+                logoFile = new File("D:\\Image\\Taj.jpg");
+                logo = new BufferedImage(Controller.width + 1, Controller.height + 1, BufferedImage.TYPE_INT_ARGB);
+                logo = ImageIO.read(logoFile);
+                System.out.println("Reading complete.");
+              }catch(IOException e){
+                System.out.println("Error: "+e);
+              }
+          
     }
 
     public void makeTeamSchedule() throws IOException{

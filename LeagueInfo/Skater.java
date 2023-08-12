@@ -1,5 +1,7 @@
 package LeagueInfo;
 
+import java.util.Random;
+
 public class Skater extends Player{
 
     String position;
@@ -20,6 +22,8 @@ public class Skater extends Player{
         defenseSkill = (int) (Math.random() * (99 - 40)) + 40;
         overall = (skatingSkill + shootingSkill + defenseSkill)/3;
         age = (int) (Math.random() * (40 - 18) + 18);
+        Random r = new Random();
+        setPotential((int) r.nextGaussian()* 25 + 50);
     }
 
     public String getPosition(){
@@ -52,5 +56,9 @@ public class Skater extends Player{
 
     public void setDefensiveSkill(int defenseSkill){
         this.defenseSkill = defenseSkill;
+    }
+
+    public int getOverall(){
+        return this.overall;
     }
 }

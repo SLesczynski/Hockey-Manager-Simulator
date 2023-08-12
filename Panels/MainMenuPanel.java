@@ -12,7 +12,6 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.border.Border;
 
 
 public class MainMenuPanel extends JPanel implements ActionListener{
@@ -30,30 +29,27 @@ public class MainMenuPanel extends JPanel implements ActionListener{
         JLabel gameName = new JLabel();
         gameName.setText("Hockey Manager Simulator");
         gameName.setHorizontalAlignment(JTextField.CENTER);
-        gameName.setBounds(0, 10, this.getWidth(), 75);
-        System.out.println(Controller.width);
-        System.out.println(Controller.height);
+        gameName.setBounds(0, 10, this.getWidth(), this.getHeight()/7);
         gameName.setForeground(Color.white);
         gameName.setFont(new Font("Verdana", Font.PLAIN, 75));
         add(gameName);
 
         //Setup button to switch to Team Selection screen
         startCareerButton = new JButton();
-        startCareerButton.setBounds(Controller.width/100, Controller.height/3, Controller.width/2 - Controller.width/100, Controller.height/4);
+        startCareerButton.setBounds(this.getWidth()/100, this.getHeight()/3, this.getWidth()/2 - this.getWidth()/100, this.getHeight()/4);
         startCareerButton.addActionListener((ActionListener) this);
         startCareerButton.setText("New Career");
         add(startCareerButton);
 
         //Setup button to switch to OneVsOne screen
         startSingleGameButton = new JButton();
-        startSingleGameButton.setBounds(Controller.width/2 + Controller.width/100, Controller.height/3, Controller.width/2 - (2 * Controller.width/100), Controller.height/4);
+        startSingleGameButton.setBounds(this.getWidth()/2 + this.getWidth()/100, this.getHeight()/3, this.getWidth()/2 - (2 * this.getWidth()/100), this.getHeight()/4);
         startSingleGameButton.addActionListener((ActionListener) this);
         startSingleGameButton.setText("Single Game");
         add(startSingleGameButton);
 
         //Border
-        Border border = BorderFactory.createLineBorder(Color.RED, Controller.width/675);
-        setBorder(border);
+        setBorder(BorderFactory.createLineBorder(Color.RED, Controller.width/300));
     }
 
     @Override

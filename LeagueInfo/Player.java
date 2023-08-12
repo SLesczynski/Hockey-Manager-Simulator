@@ -7,6 +7,8 @@ public abstract class Player {
     int height = 100;
     int weight = 100;
 
+    int potential;
+
     public int[] seasonStats = {0,0,0};
     int[][] careerStats = {};
 
@@ -44,5 +46,9 @@ public abstract class Player {
 
     public void setWeight(int newWeight){
         this.weight = newWeight;
+    }
+
+    public void setPotential(int potential){
+        this.potential = potential;
     }
 }

@@ -17,7 +17,9 @@ public class Controller extends JFrame{
     static JFrame thisJFrame;
     public Controller(){
         thisJFrame = this;
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setExtendedState(JFrame.MAXIMIZED_BOTH); 
+        setUndecorated(true);
+        setVisible(true);
         setVisible(true);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
