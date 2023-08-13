@@ -51,4 +51,12 @@ public abstract class Player {
     public void setPotential(int potential){
         this.potential = potential;
     }
+
+    public int getValue() {
+        return 100;
+    }
+
+    public String getPosition() {
+        return "Player";
+    }
 }

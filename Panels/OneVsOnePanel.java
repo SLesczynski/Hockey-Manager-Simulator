@@ -155,6 +155,6 @@ public class OneVsOnePanel extends JPanel implements ActionListener{
 
             updateInformation(homeTeamInformation, thisHomeTeam, "left");
             updateInformation(awayTeamInformation, thisAwayTeam, "right");
-    }
+        }
     }
 }

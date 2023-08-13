@@ -65,4 +65,14 @@ public class Controller extends JFrame{
         thisJFrame.invalidate();
         thisJFrame.validate();
     }
+
+
+    //Should change to list of items, add value, compare, move respective items, return true or false.
+    public boolean tryTrade(int valueOne, int valueTwo){
+        if(valueOne * 0.9 <= valueTwo && valueOne * 1.1 >= valueTwo){
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
