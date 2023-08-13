@@ -48,11 +48,12 @@ public class SelectManagedTeam extends JPanel implements ActionListener{
         this.add(selectedManagedTeam);
 
         //Logo of selected team.
+        //Will be to the left of the team selector and display the logo of the current team.
         this.add(new JLabel(new ImageIcon("Chicago.png")));
 
         //Setup button to switch to another screen
         startGame = new JButton();
-        startGame.setBounds(200, 600, 500, 50);
+        startGame.setBounds(this.getWidth()/4, (int) ((int) this.getHeight() * 0.75), this.getWidth()/2, this.getHeight()/8);
         startGame.addActionListener((ActionListener) this);
         startGame.setText("Click to Start");
         this.add(startGame);

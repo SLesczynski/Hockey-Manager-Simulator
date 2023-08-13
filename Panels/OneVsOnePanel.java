@@ -47,7 +47,7 @@ public class OneVsOnePanel extends JPanel implements ActionListener{
         Color myGray = new Color(50, 50, 50);
 
         // Setup JFrame
-        setBounds(0, 0, 1000, 1000);
+        setBounds(0, 0, Controller.width, Controller.height);
         setLayout(null);
         setBackground(Color.darkGray);
 

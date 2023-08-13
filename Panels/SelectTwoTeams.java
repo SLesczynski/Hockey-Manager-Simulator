@@ -24,7 +24,7 @@ public class SelectTwoTeams extends JPanel implements ActionListener{
     public SelectTwoTeams(){
 
         //Setup Panel
-        setBounds(0, 0, 1000, 1000);
+        setBounds(0, 0, Controller.width, Controller.height);
         setLayout(null);
         setBackground(Color.darkGray);
 

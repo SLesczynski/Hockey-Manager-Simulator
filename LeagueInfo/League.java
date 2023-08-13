@@ -34,7 +34,7 @@ public class League {
         }
 
         for(int i = 0; i < teamArray.length; i++){
-            teamNameArray[i] = teamArray[i].name;
+            teamNameArray[i] = teamArray[i].city + " " + teamArray[i].name;
         }
     }
 }

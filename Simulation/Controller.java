@@ -5,7 +5,6 @@ import javax.swing.JFrame;
 
 import LeagueInfo.Team;
 import Panels.*;
-import Panels.SelectTwoTeams;
 
 /**
  * Controller
@@ -59,5 +58,11 @@ public class Controller extends JFrame{
 
     public static void simulateDay() throws IOException{
         SeasonSimulation.simulateDay();
+    }
+
+    public static void setTradePanel(Team managedTeam) {
+        thisJFrame.setContentPane(new TradePanel(managedTeam));
+        thisJFrame.invalidate();
+        thisJFrame.validate();
     }
 }
