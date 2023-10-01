@@ -11,17 +11,21 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import LeagueInfo.League;
 import LeagueInfo.Team;
 import Simulation.Controller;
 
-public class TradePanel extends JPanel{
+public class TradePanel extends JPanel implements ActionListener{
     
     Team yourTeam;
     Team selectedTeam;
 
     JComboBox<String> selectedManagedTeam;
+
     JButton backButton;
 
     public TradePanel(Team managedTeam){
@@ -80,12 +84,13 @@ public class TradePanel extends JPanel{
         add(theirAssests);
         //Submit trade
 
-        //Go Back
+        // Go Back
         backButton = new JButton();
         backButton.setBounds((int) ((int) this.getWidth() * 0.05),
                                 (int) ((int) this.getHeight() * 0.9),
                                 (int) ((int) this.getWidth() * 0.1),
                                 (int) ((int) this.getHeight() * 0.05));
+        backButton.addActionListener((ActionListener) this);
         backButton.setText("Back");
         backButton.setFont(new Font("Verdana", Font.PLAIN, 20));
         add(backButton);
@@ -108,5 +113,16 @@ public class TradePanel extends JPanel{
         table.getColumnModel().getColumn(1).setPreferredWidth(10);
         table.getColumnModel().getColumn(2).setPreferredWidth(10);
         table.getColumnModel().getColumn(3).setPreferredWidth(10);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(e.getSource() == backButton){
+            try {
+                Controller.setManagerView(yourTeam);
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+        }
     }
 }
