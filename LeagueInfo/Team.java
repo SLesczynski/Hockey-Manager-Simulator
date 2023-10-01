@@ -1,14 +1,10 @@
 package LeagueInfo;
 
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.imageio.ImageIO;
-
-import Simulation.Controller;
+import javax.swing.ImageIcon;
 
 public class Team {
     String city;
@@ -29,8 +25,7 @@ public class Team {
     int goalie = 0;
     int overall;
 
-    BufferedImage logo = null;
-    File logoFile = null;
+    public ImageIcon logo = new ImageIcon();
 
     Team(String inputCity, String inputName) throws IOException{
     
@@ -68,15 +63,10 @@ public class Team {
             goalie = goalie/numGoalies;
             overall = offense + defense + goalie;
 
-            try{
-                System.out.println(this.city + ".png");
-                logoFile = new File("D:\\Image\\Taj.jpg");
-                logo = new BufferedImage(Controller.width + 1, Controller.height + 1, BufferedImage.TYPE_INT_ARGB);
-                logo = ImageIO.read(logoFile);
-                System.out.println("Reading complete.");
-              }catch(IOException e){
-                System.out.println("Error: "+e);
-              }
+            System.out.println(this.city + ".png");
+            String fileName = "Logos\\" + this.city + ".png";
+            logo = new ImageIcon(fileName);
+            System.out.println("Reading complete.");
           
     }
 

@@ -25,6 +25,8 @@ public class SelectManagedTeam extends JPanel implements ActionListener{
 
     JButton startGame;
 
+    ImageIcon logo = League.teamArray[0].logo;
+
     public SelectManagedTeam(){
         
         //Setup Panel
@@ -43,13 +45,17 @@ public class SelectManagedTeam extends JPanel implements ActionListener{
 
         //Team Selection
         selectedManagedTeam = new JComboBox<>(League.teamNameArray);
+        selectedManagedTeam.addActionListener((ActionListener) this);
         selectedManagedTeam.setBounds(this.getWidth()/2, (int) ((int) this.getHeight() * 0.2), this.getWidth()/2, this.getHeight()/2);
         selectedManagedTeam.setFont(new Font("Verdana", Font.PLAIN, 40));
         this.add(selectedManagedTeam);
 
         //Logo of selected team.
         //Will be to the left of the team selector and display the logo of the current team.
-        this.add(new JLabel(new ImageIcon("Chicago.png")));
+        JLabel logoLocation = new JLabel();
+        logoLocation.setIcon(logo);
+        logoLocation.setBounds(0, (int) ((int) this.getHeight() * 0.2), this.getWidth()/2, this.getHeight()/2);
+        this.add(logoLocation);
 
         //Setup button to switch to another screen
         startGame = new JButton();
@@ -61,10 +67,17 @@ public class SelectManagedTeam extends JPanel implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        try {
-            Controller.setManagerView(League.teamArray[selectedManagedTeam.getSelectedIndex()]);
-        } catch (IOException e1) {
-            e1.printStackTrace();
+        if(e.getSource() == startGame){
+            try {
+                Controller.setManagerView(League.teamArray[selectedManagedTeam.getSelectedIndex()]);
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+        } else if(e.getSource() == selectedManagedTeam){
+            selectedManagedTeam.getSelectedIndex();
+            logo = League.teamArray[selectedManagedTeam.getSelectedIndex()].logo;
+            this.validate();
+            System.out.println(logo);
         }
     }
 }
