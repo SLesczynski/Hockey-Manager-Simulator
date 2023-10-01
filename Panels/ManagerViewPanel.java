@@ -2,11 +2,13 @@ package Panels;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -25,6 +27,7 @@ public class ManagerViewPanel extends JPanel implements ActionListener{
     Team managerTeam;
     JButton nextDay;
     JButton tradeMenu;
+    JButton rosterButton;
 
     JTable teamInformationTable;
 
@@ -85,15 +88,38 @@ public class ManagerViewPanel extends JPanel implements ActionListener{
         lastGameInformation.setBorder(BorderFactory.createLineBorder(Color.RED, Controller.width/300));
         add(lastGameInformation);
 
+        //Add logo of your team.
+        JLabel logoLocation = new JLabel(managedTeam.logo, JLabel.CENTER);
+        logoLocation.setBounds((int) ((int) this.getHeight() * 0.01),
+                               (int) ((int) this.getHeight() * 0.01),
+                               (int) ((int) this.getHeight() * 0.075),
+                               (int) ((int) this.getHeight() * 0.08));
+        ImageIcon logo = managedTeam.logo;
+        Image image = logo.getImage();
+        Image newImage = image.getScaledInstance(logoLocation.getWidth(), logoLocation.getHeight(), java.awt.Image.SCALE_SMOOTH);
+        logo = new ImageIcon(newImage);
+        logoLocation.setIcon(logo);
+        this.add(logoLocation);
+
         //Set up button to go to trade menu.
         tradeMenu = new JButton();
-        tradeMenu.setBounds((int) ((int) this.getWidth() * 0.025),
+        tradeMenu.setBounds((int) ((int) this.getWidth() * 0.01),
                           (int) ((int) this.getHeight() * 0.1),
                           (int) ((int) this.getWidth() * 0.1),
                           (int) ((int) this.getHeight() * 0.1));
         tradeMenu.addActionListener((ActionListener) this);
         tradeMenu.setText("Trade");
         add(tradeMenu);
+
+        //Set up button to show roster.
+        rosterButton = new JButton();
+        rosterButton.setBounds((int) ((int) this.getWidth() * 0.01),
+                          (int) ((int) this.getHeight() * 0.21),
+                          (int) ((int) this.getWidth() * 0.1),
+                          (int) ((int) this.getHeight() * 0.1));
+        rosterButton.addActionListener((ActionListener) this);
+        rosterButton.setText("Roster");
+        add(rosterButton);
     }
 
     public void updateTable(JTable table){
@@ -141,6 +167,8 @@ public class ManagerViewPanel extends JPanel implements ActionListener{
             updateTable(teamInformationTable);
         } else if(e.getSource() == tradeMenu){
             Controller.setTradePanel(managerTeam);
+        } else if(e.getSource() == rosterButton){
+            Controller.setRosterPanel(managerTeam);
         }
     }    
 }

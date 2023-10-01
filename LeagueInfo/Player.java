@@ -7,6 +7,7 @@ public abstract class Player {
     int height = 100;
     int weight = 100;
 
+    int overall;
     int potential;
 
     public int[] seasonStats = {0,0,0};
@@ -48,6 +49,10 @@ public abstract class Player {
         this.weight = newWeight;
     }
 
+    public int getPotential(){
+        return potential;
+    }
+
     public void setPotential(int potential){
         this.potential = potential;
     }
@@ -58,5 +63,9 @@ public abstract class Player {
 
     public String getPosition() {
         return "Player";
+    }
+
+    public int getOverall(){
+        return overall;
     }
 }

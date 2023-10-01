@@ -48,18 +48,7 @@ public class TradePanel extends JPanel{
         gameName.setFont(new Font("Verdana", Font.PLAIN, 75));
         add(gameName);
 
-        //Show your assests.
-        /*
-        Player[] data = yourTeam.roster;
-        JList dataList = new JList(data);
-        JScrollPane scrollPane = new JScrollPane(dataList);
-        scrollPane.setBounds((int) ((int) this.getWidth() * 0.05),
-                                    (int) ((int) this.getHeight() * 0.125),
-                                    (int) ((int) this.getWidth() * 0.3),
-                                    (int) ((int) this.getHeight() * 0.6));
-        add(scrollPane);
-        */
-
+        //Your assests
         JTable yourAssests = new JTable();
         updateTable(yourAssests, yourTeam);
         yourAssests.setFont(new Font("Verdana", Font.PLAIN, 17));

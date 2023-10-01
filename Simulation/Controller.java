@@ -66,6 +66,11 @@ public class Controller extends JFrame{
         thisJFrame.validate();
     }
 
+    public static void setRosterPanel(Team managerTeam) {
+        thisJFrame.setContentPane(new RosterPanel(managerTeam));
+        thisJFrame.invalidate();
+        thisJFrame.validate();
+    }
 
     //Should change to list of items, add value, compare, move respective items, return true or false.
     public boolean tryTrade(int valueOne, int valueTwo){
@@ -75,4 +80,5 @@ public class Controller extends JFrame{
             return false;
         }
     }
+
 }

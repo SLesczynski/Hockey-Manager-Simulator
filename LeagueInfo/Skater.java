@@ -8,7 +8,6 @@ public class Skater extends Player{
     int skatingSkill;
     int shootingSkill;
     int defenseSkill;
-    int overall;
 
     Skater(String name, String lastName, String position){
         setFirstName(name);
@@ -23,7 +22,7 @@ public class Skater extends Player{
         overall = (skatingSkill + shootingSkill + defenseSkill)/3;
         age = (int) (Math.random() * (40 - 18) + 18);
         Random r = new Random();
-        setPotential((int) r.nextGaussian()* 25 + 50);
+        setPotential(r.nextInt(50,99));
     }
 
     public String getPosition(){
