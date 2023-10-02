@@ -22,6 +22,9 @@ public class SelectManagedTeam extends JPanel implements ActionListener{
     
     JComboBox<String> selectedManagedTeam;
 
+
+    JLabel logoLocation;
+
     JTable teamInformationTable;
 
     JButton startGame;
@@ -53,11 +56,11 @@ public class SelectManagedTeam extends JPanel implements ActionListener{
 
         //Logo of selected team.
         //Will be to the left of the team selector and display the logo of the current team.
-        JLabel logoLocation = new JLabel();
+        logoLocation = new JLabel();
         logoLocation.setBounds(0, (int) ((int) this.getHeight() * 0.2), this.getWidth()/2, this.getHeight()/2);
         logoLocation.setHorizontalAlignment(JLabel.CENTER);
         Image image = logo.getImage();
-        Image newImage = image.getScaledInstance(logoLocation.getWidth(), logoLocation.getHeight(), java.awt.Image.SCALE_SMOOTH);
+        Image newImage = image.getScaledInstance(logoLocation.getWidth(), logoLocation.getHeight(), Image.SCALE_SMOOTH);
         logo = new ImageIcon(newImage);
         logoLocation.setIcon(logo);
         this.add(logoLocation);
@@ -79,10 +82,11 @@ public class SelectManagedTeam extends JPanel implements ActionListener{
                 e1.printStackTrace();
             }
         } else if(e.getSource() == selectedManagedTeam){
-            selectedManagedTeam.getSelectedIndex();
             logo = League.teamArray[selectedManagedTeam.getSelectedIndex()].logo;
-            this.revalidate();
-            this.repaint();
+            Image image = logo.getImage();
+            Image newImage = image.getScaledInstance(logoLocation.getWidth(), logoLocation.getHeight(), Image.SCALE_SMOOTH);
+            logo = new ImageIcon(newImage);
+            logoLocation.setIcon(logo);
             System.out.println(logo);
         }
     }
